@@ -1,0 +1,5 @@
+{
+  "AppSyncApiName": "pricewizard",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false
+}
