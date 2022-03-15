@@ -16,7 +16,16 @@ function App() {
   }, []);
 
   async function fetchNotes() {
-    const apiData = await API.graphql({ query: listNotes });
+    const apiData = await API.graphql({ 
+      query: listNotes,
+      variables: {
+        filter: {
+          name: {
+            contains: 'pizza'
+          }
+        }
+      }
+     });
     setNotes(apiData.data.listNotes.items);
   }
 
@@ -35,7 +44,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>My Notes App</h1>
+      <h1>Price Wizard (PROTOTYPE)</h1>
       <input
         onChange={e => setFormData({ ...formData, 'name': e.target.value})}
         placeholder="Note name"
