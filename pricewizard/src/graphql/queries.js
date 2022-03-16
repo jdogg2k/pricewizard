@@ -30,3 +30,36 @@ export const listNotes = /* GraphQL */ `
     }
   }
 `;
+export const getProductCategory = /* GraphQL */ `
+  query GetProductCategory($id: ID!) {
+    getProductCategory(id: $id) {
+      id
+      name
+      userid
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listProductCategories = /* GraphQL */ `
+  query ListProductCategories(
+    $filter: ModelProductCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProductCategories(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        userid
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

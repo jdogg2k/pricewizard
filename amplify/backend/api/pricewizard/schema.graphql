@@ -7,3 +7,9 @@ type Note @model {
   name: String!
   description: String
 }
+
+type ProductCategory @model {
+  id: ID!
+  name: String!
+  userid: String!
+}

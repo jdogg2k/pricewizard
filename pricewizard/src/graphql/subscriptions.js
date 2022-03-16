@@ -34,3 +34,36 @@ export const onDeleteNote = /* GraphQL */ `
     }
   }
 `;
+export const onCreateProductCategory = /* GraphQL */ `
+  subscription OnCreateProductCategory {
+    onCreateProductCategory {
+      id
+      name
+      userid
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateProductCategory = /* GraphQL */ `
+  subscription OnUpdateProductCategory {
+    onUpdateProductCategory {
+      id
+      name
+      userid
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteProductCategory = /* GraphQL */ `
+  subscription OnDeleteProductCategory {
+    onDeleteProductCategory {
+      id
+      name
+      userid
+      createdAt
+      updatedAt
+    }
+  }
+`;
