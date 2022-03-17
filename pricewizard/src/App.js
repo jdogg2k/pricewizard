@@ -7,8 +7,9 @@ import { Auth } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listProductCategories } from './graphql/queries';
 import { createProductCategory as createProductCategoryMutation} from './graphql/mutations';
+import { deleteProductCategory as deleteProductCategoryMutation} from './graphql/mutations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons'
+import { faHandHoldingDollar, faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 
 const newCategoryState = { name: '', userid: '' }
 
@@ -51,12 +52,11 @@ function App() {
     setShow(false);
   }
 
-  /*async function deleteNote({ id }) {
-    const newNotesArray = notes.filter(note => note.id !== id);
-    setNotes(newNotesArray);
-    await API.graphql({ query: deleteNoteMutation, variables: { input: { id } }});
-              <button onClick={() => deleteNote(note)}>Delete note</button>
-  }*/
+  async function deleteProductCategory({ id }) {
+    const newCategoryArray = categories.filter(category => category.id !== id);
+    setCategories(newCategoryArray);
+    await API.graphql({ query: deleteProductCategoryMutation, variables: { input: { id } }});
+  }
 
   return (
     <div className="App">
@@ -64,25 +64,34 @@ function App() {
 
       <div className="container">
         <div className="row">
-          <div class="row row-cols-1 row-cols-md-3 g-4" style={{marginBottom: 30}}>
+          <div className="row row-cols-1 row-cols-md-3 g-4" style={{marginBottom: 30}}>
           {
             categories.map(category => (
-              <div class="col">
-                <div class="card h-100">
-                  <FontAwesomeIcon icon={faHandHoldingDollar} size="6x" />
-                  <div class="card-body">
-                    <h5 class="card-title">{category.name}</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div className="col" key={category.id}>
+                <div className="card h-100 category">
+                  <FontAwesomeIcon icon={faHandHoldingDollar} className="category-icon" size="6x" />
+                  <div className="card-body">
+                    <h5 className="card-title">{category.name}</h5>
+                    <p className="card-text">sample description</p>
+                    <button onClick={() => console.log(category.id)} className="btn btn-secondary">Modify</button>
+                    <button onClick={() => deleteProductCategory(category)} className="btn btn-danger">Delete</button>
                   </div>
                 </div>
               </div>
             ))
           }
+          <div className="col">
+              <div className="card h-100 new-category">
+                <FontAwesomeIcon icon={faSquarePlus} className="category-icon" size="6x" style={{marginTop: 35}} />
+                <div className="card-body">
+                  <button onClick={() => setShow(true) } className="btn btn-secondary stretched-link">Create New Product Category</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <button onClick={() => setShow(true) } style={{marginBottom: 30}}>Create New Product Category</button>
       <Modal title="New Product Category" onClose={() => setShow(false)} onSubmit={createProductCategory} show={show}>
         <div className="container">
           <div className="row">

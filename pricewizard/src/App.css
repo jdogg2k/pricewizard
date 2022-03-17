@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.category {
+  border: 4px solid #293c81;
+  border-radius: 1.25rem;
+  padding: 10px;
+}
+
+.new-category {
+  border: 4px dashed #df9a05;
+  border-radius: 1.25rem;
+  padding: 10px;
+}
+
+.category-icon {
+  color: #34419b;
+}
