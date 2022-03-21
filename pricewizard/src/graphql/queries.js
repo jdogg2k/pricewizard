@@ -30,6 +30,81 @@ export const listNotes = /* GraphQL */ `
     }
   }
 `;
+export const getPriceBuild = /* GraphQL */ `
+  query GetPriceBuild($id: ID!) {
+    getPriceBuild(id: $id) {
+      id
+      category {
+        id
+        name
+        userid
+        createdAt
+        updatedAt
+      }
+      compacquisition
+      comprelacement
+      compsegment
+      compshrink
+      packaging
+      finishedshrink
+      interplantfreight
+      manufacturingcost
+      externalconsulting
+      servicevalue
+      nonstandard
+      discountpremium
+      inflationpremium
+      curriskpremium
+      cashpremium
+      taxpremium
+      marketfreight
+      createdAt
+      updatedAt
+      priceBuildCategoryId
+    }
+  }
+`;
+export const listPriceBuilds = /* GraphQL */ `
+  query ListPriceBuilds(
+    $filter: ModelPriceBuildFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPriceBuilds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        category {
+          id
+          name
+          userid
+          createdAt
+          updatedAt
+        }
+        compacquisition
+        comprelacement
+        compsegment
+        compshrink
+        packaging
+        finishedshrink
+        interplantfreight
+        manufacturingcost
+        externalconsulting
+        servicevalue
+        nonstandard
+        discountpremium
+        inflationpremium
+        curriskpremium
+        cashpremium
+        taxpremium
+        marketfreight
+        createdAt
+        updatedAt
+        priceBuildCategoryId
+      }
+      nextToken
+    }
+  }
+`;
 export const getProductCategory = /* GraphQL */ `
   query GetProductCategory($id: ID!) {
     getProductCategory(id: $id) {

@@ -34,6 +34,108 @@ export const onDeleteNote = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePriceBuild = /* GraphQL */ `
+  subscription OnCreatePriceBuild {
+    onCreatePriceBuild {
+      id
+      category {
+        id
+        name
+        userid
+        createdAt
+        updatedAt
+      }
+      compacquisition
+      comprelacement
+      compsegment
+      compshrink
+      packaging
+      finishedshrink
+      interplantfreight
+      manufacturingcost
+      externalconsulting
+      servicevalue
+      nonstandard
+      discountpremium
+      inflationpremium
+      curriskpremium
+      cashpremium
+      taxpremium
+      marketfreight
+      createdAt
+      updatedAt
+      priceBuildCategoryId
+    }
+  }
+`;
+export const onUpdatePriceBuild = /* GraphQL */ `
+  subscription OnUpdatePriceBuild {
+    onUpdatePriceBuild {
+      id
+      category {
+        id
+        name
+        userid
+        createdAt
+        updatedAt
+      }
+      compacquisition
+      comprelacement
+      compsegment
+      compshrink
+      packaging
+      finishedshrink
+      interplantfreight
+      manufacturingcost
+      externalconsulting
+      servicevalue
+      nonstandard
+      discountpremium
+      inflationpremium
+      curriskpremium
+      cashpremium
+      taxpremium
+      marketfreight
+      createdAt
+      updatedAt
+      priceBuildCategoryId
+    }
+  }
+`;
+export const onDeletePriceBuild = /* GraphQL */ `
+  subscription OnDeletePriceBuild {
+    onDeletePriceBuild {
+      id
+      category {
+        id
+        name
+        userid
+        createdAt
+        updatedAt
+      }
+      compacquisition
+      comprelacement
+      compsegment
+      compshrink
+      packaging
+      finishedshrink
+      interplantfreight
+      manufacturingcost
+      externalconsulting
+      servicevalue
+      nonstandard
+      discountpremium
+      inflationpremium
+      curriskpremium
+      cashpremium
+      taxpremium
+      marketfreight
+      createdAt
+      updatedAt
+      priceBuildCategoryId
+    }
+  }
+`;
 export const onCreateProductCategory = /* GraphQL */ `
   subscription OnCreateProductCategory {
     onCreateProductCategory {

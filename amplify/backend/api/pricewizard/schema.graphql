@@ -8,8 +8,31 @@ type Note @model {
   description: String
 }
 
+type PriceBuild @model {
+  id: ID!
+  category: ProductCategory @hasOne
+  compacquisition: Float
+  comprelacement: Float
+  compsegment: Float
+  compshrink: Float
+  packaging: Float
+  finishedshrink: Float
+  interplantfreight: Float
+  manufacturingcost: Float
+  externalconsulting: Float
+  servicevalue: Float
+  nonstandard: Float
+  discountpremium: Float
+  inflationpremium: Float
+  curriskpremium: Float
+  cashpremium: Float
+  taxpremium: Float
+  marketfreight: Float
+}
+
 type ProductCategory @model {
   id: ID!
   name: String!
   userid: String!
 }
+

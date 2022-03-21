@@ -43,6 +43,117 @@ export const deleteNote = /* GraphQL */ `
     }
   }
 `;
+export const createPriceBuild = /* GraphQL */ `
+  mutation CreatePriceBuild(
+    $input: CreatePriceBuildInput!
+    $condition: ModelPriceBuildConditionInput
+  ) {
+    createPriceBuild(input: $input, condition: $condition) {
+      id
+      category {
+        id
+        name
+        userid
+        createdAt
+        updatedAt
+      }
+      compacquisition
+      comprelacement
+      compsegment
+      compshrink
+      packaging
+      finishedshrink
+      interplantfreight
+      manufacturingcost
+      externalconsulting
+      servicevalue
+      nonstandard
+      discountpremium
+      inflationpremium
+      curriskpremium
+      cashpremium
+      taxpremium
+      marketfreight
+      createdAt
+      updatedAt
+      priceBuildCategoryId
+    }
+  }
+`;
+export const updatePriceBuild = /* GraphQL */ `
+  mutation UpdatePriceBuild(
+    $input: UpdatePriceBuildInput!
+    $condition: ModelPriceBuildConditionInput
+  ) {
+    updatePriceBuild(input: $input, condition: $condition) {
+      id
+      category {
+        id
+        name
+        userid
+        createdAt
+        updatedAt
+      }
+      compacquisition
+      comprelacement
+      compsegment
+      compshrink
+      packaging
+      finishedshrink
+      interplantfreight
+      manufacturingcost
+      externalconsulting
+      servicevalue
+      nonstandard
+      discountpremium
+      inflationpremium
+      curriskpremium
+      cashpremium
+      taxpremium
+      marketfreight
+      createdAt
+      updatedAt
+      priceBuildCategoryId
+    }
+  }
+`;
+export const deletePriceBuild = /* GraphQL */ `
+  mutation DeletePriceBuild(
+    $input: DeletePriceBuildInput!
+    $condition: ModelPriceBuildConditionInput
+  ) {
+    deletePriceBuild(input: $input, condition: $condition) {
+      id
+      category {
+        id
+        name
+        userid
+        createdAt
+        updatedAt
+      }
+      compacquisition
+      comprelacement
+      compsegment
+      compshrink
+      packaging
+      finishedshrink
+      interplantfreight
+      manufacturingcost
+      externalconsulting
+      servicevalue
+      nonstandard
+      discountpremium
+      inflationpremium
+      curriskpremium
+      cashpremium
+      taxpremium
+      marketfreight
+      createdAt
+      updatedAt
+      priceBuildCategoryId
+    }
+  }
+`;
 export const createProductCategory = /* GraphQL */ `
   mutation CreateProductCategory(
     $input: CreateProductCategoryInput!
