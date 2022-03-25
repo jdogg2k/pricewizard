@@ -13,6 +13,7 @@ import { deleteProductCategory as deleteProductCategoryMutation} from './graphql
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingDollar, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import BuildZilla from './Steps/BuildZilla';
+import PriceChart from './Charts/chart';
 
 
 const newCategoryState = { name: '', userid: '' }
@@ -21,11 +22,13 @@ function App() {
   const [buildconfirm, setBuildConfirm] = useState(false);
   const [confirmmessage, setConfirmMsg] = useState('');
   const [toaststyle, setToastStyle] = useState('success');
-  const [show, setShow] = useState(false)
-  const [pagemode, setPageMode] = useState('category')
-  const [selcategory, setActiveCategory] = useState('')
+  const [show, setShow] = useState(false);
+  const [pagemode, setPageMode] = useState('category');
+  const [selcategory, setActiveCategory] = useState('');
+  const [selcatname, setCategoryName] = useState('');
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState(newCategoryState);
+  const [vizData, setVizData] = useState({});
   const [buildState, setBuildState] = useState({ 
     priceBuildCategoryId: '',
     compacquisition: 0, 
@@ -72,7 +75,7 @@ function App() {
      setCategories(apiData.data.listProductCategories.items);
   }
 
-  async function editBuild(catID, buildType) {
+  async function editBuild(catID, catName, buildType) {
 
     var isNewBuild = false;
     if (buildType === "new") {
@@ -123,9 +126,37 @@ function App() {
         marketfreight: 0
       });
     }
-
+    setCategoryName(catName);
     setActiveCategory(catID);
     setPageMode('build');
+  }
+
+  async function visualizeBuild(catID, catName) {
+    const apiData = await API.graphql({ 
+      query: listPriceBuilds,
+      variables: {
+        filter: {
+          priceBuildCategoryId: {
+            eq: catID
+          }
+        }
+      }
+     });
+
+     if (apiData.data.listPriceBuilds.items.length > 0) {
+       var vizBuild = apiData.data.listPriceBuilds.items[0];
+       setCategoryName(catName);
+       setVizData(vizBuild);
+       setPageMode('visualize');
+     } else {
+        toastConfirm("danger", "No Build Data exists for this category!");
+     }
+  }
+
+  function initialVisualize(bData) {
+    toastConfirm("success", "Your initial build is complete! Visualization calculated...");
+    setVizData(bData);
+    setPageMode('visualize');
   }
 
   async function createProductCategory() {
@@ -135,7 +166,7 @@ function App() {
     setFormData(newCategoryState);
     setShow(false);
     toastConfirm("success", formData.name + " created successfully!  Please start your build...");
-    editBuild(newcat.data.createProductCategory.id, "new");
+    editBuild(newcat.data.createProductCategory.id, newcat.data.createProductCategory.name, "new");
   }
 
   async function deleteProductCategory({ id }) {
@@ -169,7 +200,8 @@ function App() {
                   <div className="card-body">
                     <h5 className="card-title">{category.name}</h5>
                     <p className="card-text">sample description</p>
-                    <button onClick={() => editBuild(category.id, 'mod')} className="btn btn-secondary me-1">Modify</button>
+                    <button onClick={() => visualizeBuild(category.id, category.name)} className="btn btn-info me-2">Visualize</button>
+                    <button onClick={() => editBuild(category.id, category.name, 'mod')} className="btn btn-secondary me-1">Modify</button>
                     <button onClick={() => deleteProductCategory(category)} className="btn btn-danger ms-1">Delete</button>
                   </div>
                 </div>
@@ -223,7 +255,9 @@ function App() {
         </div>  
       </Modal>
 
-      {pagemode === 'build' && <BuildZilla selCategory={selcategory} changeState={modPageState} buildState={buildState} />}
+      {pagemode === 'build' && <BuildZilla selCategory={selcategory} visualizeBuild={initialVisualize} changeState={modPageState} buildState={buildState} />}
+
+      {pagemode === 'visualize' && <PriceChart changeState={modPageState} builddata={vizData} catname={selcatname} />}
 
       <AmplifySignOut />
     </div>

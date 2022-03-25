@@ -20,11 +20,12 @@ export default function BuildZilla(props) {
       if (props.buildState.id) { //update existing build
         await API.graphql({ query: updatePriceBuildMutation, variables: { input: props.buildState } });
         msg = "Price Build Updated Successfully!";
+        props.changeState("category", msg);
       } else { //add new build
         await API.graphql({ query: createPriceBuildMutation, variables: { input: props.buildState } });
+        props.visualizeBuild(props.buildState);
       }
 
-      props.changeState("category", msg);
     }
 
     function cancelBuild() {
@@ -55,7 +56,7 @@ export default function BuildZilla(props) {
 
     let donebutton = React.createElement(
       "button",
-      { className: 'btn btn-prev btn-success mb-4 ms-2',
+      { className: 'btn btn-prev btn-success mb-4 ms-1',
         onClick: () => {saveBuild()}
       },
       "Save"
@@ -77,7 +78,7 @@ export default function BuildZilla(props) {
     return (
         <div>
       <div className='step-progress'>
-        <StepZilla steps={steps} backButtonCls="btn btn-prev btn-primary pull-left mb-4 me-1" nextButtonCls="btn btn-next btn-primary pull-right mb-4 ms-1" />
+        <StepZilla steps={steps} backButtonCls="btn btn-prev btn-primary pull-left mb-4 me-1 ms-1" nextButtonCls="btn btn-next btn-primary pull-right mb-4 ms-1 me-1" />
       </div>
     </div>
     );
