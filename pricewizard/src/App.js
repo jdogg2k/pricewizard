@@ -236,7 +236,7 @@ function App() {
       </Toast>
       </ToastContainer>
 
-      <h1>Price Wizard (PROTOTYPE)</h1>
+      <h2>Price Wizard (ALPHA Version)</h2>
 
       {pagemode === 'category' && <CategoryList />}
 
