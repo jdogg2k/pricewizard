@@ -16,6 +16,10 @@
   }
 }
 
+.step-progress .row {
+  --bs-gutter-x: 0 !important;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

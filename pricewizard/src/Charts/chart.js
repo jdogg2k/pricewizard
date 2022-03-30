@@ -57,7 +57,7 @@ export default function PriceChart(props) {
                 <Col></Col>
                 <Col xs={9} className="text-align: center;">
                     <h2>{props.catname} Build</h2>
-                    <h4>Delivered Price: <CurrencyFormat className='chartTotal' value={deliveredprice} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h4>
+                    <h4>Delivered Price: <CurrencyFormat className='chartTotal' value={deliveredprice} displayType={'text'} decimalScale={2} thousandSeparator={true} prefix={'$'} /></h4>
                 </Col>
                 <Col></Col>
             </Row>

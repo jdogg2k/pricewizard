@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingDollar, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import BuildZilla from './Steps/BuildZilla';
 import PriceChart from './Charts/chart';
+//import { SignIn } from 'aws-amplify-react';
 
 
 const newCategoryState = { name: '', userid: '' }
