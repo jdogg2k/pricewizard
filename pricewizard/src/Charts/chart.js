@@ -17,9 +17,9 @@ export default function PriceChart(props) {
 
     function addData (pName, dollars) {
         var color = "#69a2ff";
-        if (pName.indexOf("Subtotal") > -1)
+        if (pName.startsWith("Subtotal"))
             color = "#413ea0";
-        if (pName != "Delivered Price") {
+        if (pName != "Delivered Price" && !pName.startsWith("Subtotal")) {
             deliveredprice += dollars;
         } else {
             color = "#1c8219";
