@@ -16,5 +16,23 @@
         "pricewizard80733527": {}
       }
     }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pricewizard-dev-150546-authRole",
+      "UnauthRoleArn": "arn:aws:iam::269677756881:role/amplify-pricewizard-dev-150546-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::269677756881:role/amplify-pricewizard-dev-150546-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-pricewizard-dev-150546-deployment",
+      "UnauthRoleName": "amplify-pricewizard-dev-150546-unauthRole",
+      "StackName": "amplify-pricewizard-dev-150546",
+      "StackId": "arn:aws:cloudformation:us-east-1:269677756881:stack/amplify-pricewizard-dev-150546/93c5c1c0-b125-11ec-90e1-12a0ace2d6d3",
+      "AmplifyAppId": "d3mhdys3ihue7h"
+    },
+    "categories": {
+      "auth": {
+        "pricewizard80733527": {}
+      }
+    }
   }
 }
