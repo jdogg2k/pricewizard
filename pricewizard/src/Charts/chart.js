@@ -2,7 +2,13 @@ import React, { useEffect } from 'react';
 import { ComposedChart, Cell, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import CurrencyFormat from 'react-currency-format';
+import { object, string } from 'prop-types';
 
+PriceChart.propTypes = {
+    builddata: object,
+    catname: string,
+    changeState: string,
+}
 
 export default function PriceChart(props) {
 
