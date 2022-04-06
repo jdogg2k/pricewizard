@@ -3,6 +3,7 @@ import CurrencyInput from 'react-currency-input-field';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
 import { OverlayTrigger, Button, Tooltip, Modal } from 'react-bootstrap';
+import { object, node } from 'prop-types';
 
 // We need to wrap component in `forwardRef` in order to gain
 // access to the ref object that is assigned using the `ref` prop.
@@ -124,5 +125,12 @@ const MarketStep = forwardRef((props, ref) => {
         </div>
 
 });
+
+MarketStep.propTypes = {
+  data: object,
+  onHide: node,
+}
+
+MarketStep.displayName = 'MarketStep';
 
 export default MarketStep;

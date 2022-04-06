@@ -8,6 +8,13 @@ import DeliverStep from './DeliverStep';
 import MarketStep from './MarketStep';
 import { createPriceBuild as createPriceBuildMutation } from '../graphql/mutations';
 import { updatePriceBuild as updatePriceBuildMutation } from '../graphql/mutations';
+import { object, node } from 'prop-types';
+
+BuildZilla.propTypes = {
+    buildState: object,
+    visualizeBuild: node,
+    changeState: node,
+}
 
 export default function BuildZilla(props) {
 

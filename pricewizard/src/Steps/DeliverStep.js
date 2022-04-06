@@ -1,5 +1,6 @@
 import React, {forwardRef, useImperativeHandle} from 'react';
 import CurrencyInput from 'react-currency-input-field';
+import { object } from 'prop-types';
 
 // We need to wrap component in `forwardRef` in order to gain
 // access to the ref object that is assigned using the `ref` prop.
@@ -54,5 +55,11 @@ const DeliverStep = forwardRef((props, ref) => {
         </div>
 
 });
+
+DeliverStep.propTypes = {
+  data: object,
+}
+
+DeliverStep.displayName = 'DeliverStep';
 
 export default DeliverStep;

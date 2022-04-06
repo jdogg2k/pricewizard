@@ -1,3 +1,4 @@
+import { bool, node, string } from "prop-types";
 import React from "react";
 
 const Modal = props => {
@@ -19,5 +20,13 @@ const Modal = props => {
             </div>
         </div>
     )
+}
+
+Modal.propTypes = {
+    show: bool,
+    title: string,
+    onClose: node,
+    children: node,
+    onSubmit: node,
 }
 export default Modal
