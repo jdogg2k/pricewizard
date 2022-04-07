@@ -15,16 +15,30 @@ import {
   cilCommentSquare,
   cilEnvelopeOpen,
   cilFile,
-  cilLockLocked,
   cilSettings,
   cilTask,
   cilUser,
+  cilLockUnlocked,
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
-
+import { Auth } from 'aws-amplify';
 import avatar8 from './../../assets/images/avatars/8.jpg'
 
+//const navigate = useNavigate();
+
+async function signOut() {
+    try {
+        await Auth.signOut();
+        window.location.replace('/');
+    } catch (error) {
+        console.log('error signing out: ', error);
+    }
+}
+
+
+
 const AppHeaderDropdown = () => {
+
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -84,9 +98,9 @@ const AppHeaderDropdown = () => {
           </CBadge>
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#">
-          <CIcon icon={cilLockLocked} className="me-2" />
-          Lock Account
+        <CDropdownItem href="#" onClick={signOut}>
+          <CIcon icon={cilLockUnlocked} className="me-2" />
+          Sign Out
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

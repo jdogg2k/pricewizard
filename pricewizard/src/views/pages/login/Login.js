@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   CButton,
@@ -15,8 +15,30 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { Auth } from 'aws-amplify';
+import { useNavigate } from 'react-router-dom';
+
+async function signIn(uName, Pass, navigate) {
+    try {
+        await Auth.signIn(uName, Pass);
+        navigate("/");
+    } catch (error) {
+        console.log('error signing in', error);
+    }
+}
 
 const Login = () => {
+
+  const [username, setName] = useState("");
+  const [pwd, setPwd] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    signIn(username, pwd, navigate);
+  }
+
+
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -25,14 +47,14 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CForm onSubmit={handleSubmit}>
                     <h1>Login</h1>
                     <p className="text-medium-emphasis">Sign In to your account</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
+                      <CFormInput placeholder="Username" autoComplete="username" value={username} onChange={e => setName(e.target.value)}  />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -42,11 +64,12 @@ const Login = () => {
                         type="password"
                         placeholder="Password"
                         autoComplete="current-password"
+                        value={pwd} onChange={e => setPwd(e.target.value)}
                       />
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
+                        <CButton color="primary" className="px-4" type='submit' >
                           Login
                         </CButton>
                       </CCol>
@@ -80,7 +103,7 @@ const Login = () => {
         </CRow>
       </CContainer>
     </div>
-  )
+  );
 }
 
 export default Login

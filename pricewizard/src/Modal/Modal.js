@@ -1,4 +1,4 @@
-import { bool, node, string } from "prop-types";
+import { bool, node, string, func } from "prop-types";
 import React from "react";
 
 const Modal = props => {
@@ -25,8 +25,8 @@ const Modal = props => {
 Modal.propTypes = {
     show: bool,
     title: string,
-    onClose: node,
+    onClose: func,
     children: node,
-    onSubmit: node,
+    onSubmit: func,
 }
 export default Modal
