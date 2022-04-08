@@ -4,6 +4,7 @@ import { Auth } from 'aws-amplify';
 import Modal from '../../Modal/Modal';
 import '../../Modal/Modal.css';
 import '../../App.css';
+import ToastComp from '../../components/toast/ToastComp';
 import { listProductCategories, listPriceBuilds } from '../../graphql/queries';
 import { createProductCategory as createProductCategoryMutation} from '../../graphql/mutations';
 import { deleteProductCategory as deleteProductCategoryMutation} from '../../graphql/mutations';
@@ -20,6 +21,9 @@ function Categories() {
   const [selcatname, setCategoryName] = useState('');
   const [formData, setFormData] = useState(newCategoryState);
   const [show, setShow] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [confirmmessage, setConfirmMsg] = useState('');
+  const [toaststyle, setToastStyle] = useState('success');
   
   useEffect(() => {
     fetchProductCategories();
@@ -46,13 +50,23 @@ function Categories() {
      setCategories(apiData.data.listProductCategories.items);
   }
 
+  function toastConfirm(tStyle, msg) {
+    setConfirmMsg(msg);
+    setToastStyle(tStyle);
+    setShowToast(true);
+  }
+
+  function endToast() {
+    setShowToast(false);
+  }
+
   async function createProductCategory() {
     if (!formData.name || !formData.userid) return;
     const newcat = await API.graphql({ query: createProductCategoryMutation, variables: { input: formData } });
     await fetchProductCategories();
     setFormData(newCategoryState);
     setShow(false);
-   // toastConfirm("success", formData.name + " created successfully!  Please start your build...");
+    toastConfirm("success", formData.name + " created successfully!  Please start your build...");
    // editBuild(newcat.data.createProductCategory.id, newcat.data.createProductCategory.name, "new");
   }
 
@@ -65,6 +79,7 @@ function Categories() {
 
   return (
       <>
+  <ToastComp stopToast={endToast} message={confirmmessage} toaststyle={toaststyle} confirm={showToast} />
     <div className="container catboxes">
         <div className="row">
           <div className="row row-cols-1 row-cols-md-3 g-4 mb-4">
