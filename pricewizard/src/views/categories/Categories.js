@@ -99,7 +99,7 @@ function Categories() {
                     <h5 className="card-title">{category.name}</h5>
                     <p className="card-text">sample description</p>
                     <button className="btn btn-info me-2">Visualize</button>
-                    <Link to={"/build"} state={{ cat: category.id, catName: category.name }}>
+                    <Link to={"/pricebuild"} state={{ cat: category.id, catName: category.name }}>
                       <button className="btn btn-secondary me-1">Edit Build</button>
                     </Link>
                     <button onClick={() => deleteProductCategory(category)} className="btn btn-danger ms-1">Delete</button>

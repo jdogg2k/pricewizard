@@ -26,7 +26,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Build',
-    to: '/build',
+    to: '/pricebuild',
     icon: <CIcon icon={cilSettings} customClassName="nav-icon" />
   },
   {
@@ -59,7 +59,7 @@ const _nav = [
     component: CNavTitle,
     name: 'Components',
   },
-  {
+ /* {
     component: CNavGroup,
     name: 'Base',
     to: '/base',
@@ -213,6 +213,7 @@ const _nav = [
     to: '/charts',
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
+  */
   {
     component: CNavGroup,
     name: 'Icons',
@@ -239,7 +240,7 @@ const _nav = [
       },
     ],
   },
-  {
+ /* {
     component: CNavGroup,
     name: 'Notifications',
     icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
@@ -306,7 +307,7 @@ const _nav = [
         to: '/500',
       },
     ],
-  },
+  },*/
 ]
 
 export default _nav
