@@ -1,4 +1,5 @@
 import React, { useState, useEffect  } from "react";
+import { Link } from "react-router-dom";
 import { API } from 'aws-amplify';
 import { Auth } from 'aws-amplify';
 import Modal from '../../Modal/Modal';
@@ -37,19 +38,25 @@ function Categories() {
   .catch(err => console.log(err));
 
   async function fetchProductCategories() {
-    const apiData = await API.graphql({ 
-      query: listProductCategories,
-      variables: {
-        filter: {
-          userid: {
-            eq: newCategoryState.userid
+    try {
+      const apiData = await API.graphql({ 
+        query: listProductCategories,
+        variables: {
+          filter: {
+            userid: {
+              eq: newCategoryState.userid
+            }
           }
         }
-      }
-     });
-     setCategories(apiData.data.listProductCategories.items);
+       });
+      console.log(apiData.data.listProductCategories.items);
+      setCategories(apiData.data.listProductCategories.items);
+    } catch (error) {
+        console.log('error getting catagories', error);
+    }
+    
   }
-
+  
   function toastConfirm(tStyle, msg) {
     setConfirmMsg(msg);
     setToastStyle(tStyle);
@@ -92,7 +99,9 @@ function Categories() {
                     <h5 className="card-title">{category.name}</h5>
                     <p className="card-text">sample description</p>
                     <button className="btn btn-info me-2">Visualize</button>
-                    <button className="btn btn-secondary me-1">Modify</button>
+                    <Link to={"/build"} state={{ cat: category.id, catName: category.name }}>
+                      <button className="btn btn-secondary me-1">Edit Build</button>
+                    </Link>
                     <button onClick={() => deleteProductCategory(category)} className="btn btn-danger ms-1">Delete</button>
                   </div>
                 </div>

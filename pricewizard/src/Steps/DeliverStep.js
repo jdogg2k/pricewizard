@@ -15,7 +15,7 @@ const DeliverStep = forwardRef((props, ref) => {
   }*/
 
   function setStateData(v, n) {
-    props.data[n] = parseFloat(v);
+    props.data.current[n] = parseFloat(v);
   }
 
   // The component instance will be extended
@@ -44,7 +44,7 @@ const DeliverStep = forwardRef((props, ref) => {
 
           <div className="input-group mb-3 mt-5">
               <span className="input-group-text" id="basic-addon17">Market Freight</span>
-              <CurrencyInput id="marketfreight" name="marketfreight" className="form-control" prefix="$" defaultValue={props.data.marketfreight} onValueChange={(value, name) => setStateData(value, name)} />
+              <CurrencyInput id="marketfreight" name="marketfreight" className="form-control" prefix="$" defaultValue={props.data.current.marketfreight} onValueChange={(value, name) => setStateData(value, name)} />
             </div>
             <div className="form-text">
               <p className="text-start">The market cost of shipping from your plant/warehouse to a customer (only applies in instances where the customer pays for delivery). Not reflective of competitor freight costs.</p>
