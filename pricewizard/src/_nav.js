@@ -8,6 +8,7 @@ import {
   cilDrop,
   cilNotes,
   cilPencil,
+  cilChartLine,
   cilPuzzle,
   cilSpeedometer,
   cilStar,
@@ -28,6 +29,12 @@ const _nav = [
     name: 'Build',
     to: '/pricebuild',
     icon: <CIcon icon={cilSettings} customClassName="nav-icon" />
+  },
+  {
+    component: CNavItem,
+    name: 'Visualize',
+    to: '/visualize',
+    icon: <CIcon icon={cilChartLine} customClassName="nav-icon" />
   },
   {
     component: CNavItem,

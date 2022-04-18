@@ -49,12 +49,41 @@ function Categories() {
           }
         }
        });
-      console.log(apiData.data.listProductCategories.items);
-      setCategories(apiData.data.listProductCategories.items);
+
+       var catList = [];
+
+       for await (const i of apiData.data.listProductCategories.items) {
+            var newCat = i;
+            newCat.hasBuild = await checkForBuild(newCat.id);
+            catList.push(newCat);
+        };
+
+       console.log(catList);
+       setCategories(catList);
+       
     } catch (error) {
         console.log('error getting catagories', error);
     }
     
+  }
+
+  async function checkForBuild(catID) {
+    const apiData = await API.graphql({ 
+      query: listPriceBuilds,
+      variables: {
+        filter: {
+          priceBuildCategoryId: {
+            eq: catID
+          }
+        }
+      }
+     });
+
+     if (apiData.data.listPriceBuilds.items.length > 0) {
+      return true;
+     } else {
+      return false;
+     } 
   }
   
   function toastConfirm(tStyle, msg) {
@@ -97,8 +126,10 @@ function Categories() {
                   <FontAwesomeIcon icon={faHandHoldingDollar} className="category-icon" size="6x" />
                   <div className="card-body">
                     <h5 className="card-title">{category.name}</h5>
-                    <p className="card-text">sample description</p>
-                    <button className="btn btn-info me-2">Visualize</button>
+                    <p className="card-text">sample description {category.hasBuild}</p>
+                    {category.hasBuild === true && <Link to={"/visualize"} state={{ cat: category.id, catName: category.name }}>
+                      <button className="btn btn-info me-2">Visualize</button>
+                    </Link>}
                     <Link to={"/pricebuild"} state={{ cat: category.id, catName: category.name }}>
                       <button className="btn btn-secondary me-1">Edit Build</button>
                     </Link>

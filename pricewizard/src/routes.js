@@ -5,6 +5,7 @@ const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 const Categories = React.lazy(() => import('./views/categories/Categories'))
 const Build = React.lazy(() => import('./views/pricebuild/Build'))
+const Visualize = React.lazy(() => import('./views/visualize/Visualize'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -98,6 +99,7 @@ const routes = [
   { path: '/notifications/badges', name: 'Badges', element: Badges },
   { path: '/notifications/modals', name: 'Modals', element: Modals },
   { path: '/notifications/toasts', name: 'Toasts', element: Toasts },
+  { path: '/visualize', name: 'Visualize', element: Visualize },
   { path: '/widgets', name: 'Widgets', element: Widgets },
 ]
 
