@@ -1,5 +1,5 @@
 import React, { useState, useEffect  } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API } from 'aws-amplify';
 import { Auth } from 'aws-amplify';
 import Modal from '../../Modal/Modal';
@@ -11,15 +11,13 @@ import { createProductCategory as createProductCategoryMutation} from '../../gra
 import { deleteProductCategory as deleteProductCategoryMutation} from '../../graphql/mutations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingDollar, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
-
+import { ReactSession } from 'react-client-session';
 
 const newCategoryState = { name: '', userid: '' }
 
 function Categories() {
-  const [name, setName] = useState("");
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-  const [selcategory, setActiveCategory] = useState('');
-  const [selcatname, setCategoryName] = useState('');
   const [formData, setFormData] = useState(newCategoryState);
   const [show, setShow] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -58,7 +56,6 @@ function Categories() {
             catList.push(newCat);
         };
 
-       console.log(catList);
        setCategories(catList);
        
     } catch (error) {
@@ -113,6 +110,19 @@ function Categories() {
     //toastConfirm("danger", "Price Category Deleted");
   }
 
+  function processBuild(tCat, mode) {
+    var catObj = {};
+    catObj.value = tCat.id;
+    catObj.label = tCat.name;
+    ReactSession.set("selcategory", catObj);
+
+    var navloc = "/pricebuild";
+    if (mode == "visualize")
+      navloc = "/visualize";
+
+    navigate(navloc);
+  }
+
   return (
       <>
   <ToastComp stopToast={endToast} message={confirmmessage} toaststyle={toaststyle} confirm={showToast} />
@@ -127,12 +137,8 @@ function Categories() {
                   <div className="card-body">
                     <h5 className="card-title">{category.name}</h5>
                     <p className="card-text">sample description {category.hasBuild}</p>
-                    {category.hasBuild === true && <Link to={"/visualize"} state={{ cat: category.id, catName: category.name }}>
-                      <button className="btn btn-info me-2">Visualize</button>
-                    </Link>}
-                    <Link to={"/pricebuild"} state={{ cat: category.id, catName: category.name }}>
-                      <button className="btn btn-secondary me-1">Edit Build</button>
-                    </Link>
+                    {category.hasBuild === true && <button onClick={() => processBuild(category, 'visualize')} className="btn btn-info me-2">Visualize</button>}
+                    <button onClick={() => processBuild(category, 'build')} className="btn btn-secondary me-1">Edit Build</button>
                     <button onClick={() => deleteProductCategory(category)} className="btn btn-danger ms-1">Delete</button>
                   </div>
                 </div>

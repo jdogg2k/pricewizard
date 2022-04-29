@@ -1,27 +1,25 @@
 import React, { useState, useEffect, useRef  } from "react";
-import { useLocation } from "react-router-dom";
 import { API } from 'aws-amplify';
 import '../../Modal/Modal.css';
 import '../../App.css';
 import PriceChart from '../../Charts/chart';
 import { listPriceBuilds } from '../../graphql/queries';
+import { ReactSession } from 'react-client-session';
 
 function Visualize() {
-
     
     const [vizData, setVizData] = useState({});
-    const location = useLocation();
 
-    function getCatInfo(cType) {
-        var catRes = "";
-        if (location.state != null) {
-            catRes = location.state[cType]; 
-        }
-        return catRes;
+    let categoryID = "";
+    let categoryName = "";
+
+    //get from session
+    var catObj = ReactSession.get("selcategory");
+
+    if (catObj.value) {
+        categoryID = catObj.value;
+        categoryName = catObj.label;
     }
-
-    const categoryID = getCatInfo("cat");
-    const categoryName = getCatInfo("catName");
 
     visualizeBuild(categoryID);
 
@@ -47,7 +45,7 @@ function Visualize() {
 
     return(        
         <>
-        <div className="container">
+        <div className="container catboxes">
             <PriceChart builddata={vizData} catname={categoryName} />
         </div>
         </>

@@ -132,7 +132,7 @@ export default function BuildZilla(props) {
     addButtons();
 
   } else {
-    alert("No Pricing Catagory Selected.  Please create a category to start a build!");
+    alert("No Pricing Catagory Selected.  Please create/select a category to start a build!");
   }
 
   }

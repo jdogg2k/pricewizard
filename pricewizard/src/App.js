@@ -1,5 +1,6 @@
 import React, { Component, Suspense } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
+import { ReactSession } from 'react-client-session';
 import './scss/style.scss'
 import ProtectedRoute from './PrivateRoute'
 
@@ -20,6 +21,8 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 class App extends Component {
   render() {
+
+    ReactSession.setStoreType("localStorage");
     
     return (
       <HashRouter>

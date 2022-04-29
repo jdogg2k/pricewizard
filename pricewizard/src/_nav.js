@@ -36,7 +36,7 @@ const _nav = [
     to: '/visualize',
     icon: <CIcon icon={cilChartLine} customClassName="nav-icon" />
   },
-  {
+  /*{
     component: CNavItem,
     name: 'Dashboard',
     to: '/dashboard',
@@ -45,7 +45,7 @@ const _nav = [
       color: 'info',
       text: 'NEW',
     },
-  },
+  },*/
   {
     component: CNavTitle,
     name: 'Theme',

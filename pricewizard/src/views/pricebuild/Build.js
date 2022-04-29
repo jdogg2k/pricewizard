@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useRef  } from "react";
-import { useLocation } from "react-router-dom";
 import { API } from 'aws-amplify';
 import '../../Modal/Modal.css';
 import '../../App.css';
 import BuildZilla from '../../Steps/BuildZilla';
+import { ReactSession } from 'react-client-session';
 
 function Build() {
 
-    const location = useLocation();
+    let categoryID = "";
+    let categoryName = "";
 
-    function getCatInfo(cType) {
-        var catRes = "";
-        if (location.state != null) {
-            catRes = location.state[cType]; 
-        }
-        return catRes;
+    //get from session
+    var catObj = ReactSession.get("selcategory");
+
+    if (catObj.value) {
+        categoryID = catObj.value;
+        categoryName = catObj.label;
     }
 
-    const categoryID = getCatInfo("cat");
-    const categoryName = getCatInfo("catName");
+    
 
     return(        
         <>

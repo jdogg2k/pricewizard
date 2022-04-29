@@ -3,6 +3,7 @@ import { ComposedChart, Cell, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, L
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import CurrencyFormat from 'react-currency-format';
 import { object, string } from 'prop-types';
+import { Link } from "react-router-dom";
 
 PriceChart.propTypes = {
     builddata: object,
@@ -102,7 +103,10 @@ export default function PriceChart(props) {
             <Row>
                 <Col></Col>
                 <Col xs={9}>
-                <Button variant="secondary" onClick={goBack} className="mb-2">Back</Button>
+                <Link to={"/categories"}>
+                    <Button variant="secondary" className="mb-2">Back</Button>
+                </Link>
+                
                 </Col>
                 <Col></Col>
             </Row>

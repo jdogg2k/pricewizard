@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  CAvatar,
   CBadge,
   CDropdown,
   CDropdownDivider,
@@ -22,9 +21,10 @@ import {
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import { Auth } from 'aws-amplify';
-import avatar8 from './../../assets/images/avatars/8.jpg'
+//import avatar8 from './../../assets/images/avatars/8.jpg'
 
-//const navigate = useNavigate();
+let userName = "";
+let userLetter = "";
 
 async function signOut() {
     try {
@@ -35,6 +35,13 @@ async function signOut() {
     }
 }
 
+Auth.currentAuthenticatedUser({
+  bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+}).then(user => {
+  userName = user.username;
+  userLetter = userName.charAt(0).toUpperCase();
+})
+.catch(err => console.log(err));
 
 
 const AppHeaderDropdown = () => {
@@ -42,9 +49,12 @@ const AppHeaderDropdown = () => {
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-        <CAvatar src={avatar8} size="md" />
+          <h2><CBadge color="info" className="ms-2 lg">
+            {userLetter}
+          </CBadge></h2>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
+        <CDropdownHeader className="bg-dark fw-semibold py-2 text-light">{userName}</CDropdownHeader>
         <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>
         <CDropdownItem href="#">
           <CIcon icon={cilBell} className="me-2" />
