@@ -11,15 +11,11 @@ import '../App.css';
 import ToastComp from '../components/toast/ToastComp';
 import { createPriceBuild as createPriceBuildMutation } from '../graphql/mutations';
 import { updatePriceBuild as updatePriceBuildMutation } from '../graphql/mutations';
-import { object, node, string } from 'prop-types';
+import { string } from 'prop-types';
 import { listPriceBuilds } from '../graphql/queries';
-import { check } from 'prettier';
-import { AmplifyFederatedButtons } from '@aws-amplify/ui-react';
 
 BuildZilla.propTypes = {
-    selCategory: string,
-    //visualizeBuild: node,
-    //changeState: node,
+    selCategory: string
 }
 
 export default function BuildZilla(props) {
@@ -29,6 +25,7 @@ export default function BuildZilla(props) {
   const [confirmmessage, setConfirmMsg] = useState('');
   const [toaststyle, setToastStyle] = useState('success');
   const [buildLoaded, setBuildLoaded] = useState(false);
+  const [x, setX] = useState();
 
   let buildObj = useRef({ 
     priceBuildCategoryId: '',
@@ -106,7 +103,7 @@ export default function BuildZilla(props) {
       marketfreight: 0
   };
   
-  if (props.selCategory != "") {
+  if (props.selCategory !== "") {
 
     const apiData = await API.graphql({ 
       query: listPriceBuilds,
@@ -157,6 +154,11 @@ export default function BuildZilla(props) {
 
   }
 
+  function setFreight(val) {
+    buildObj.current.marketfreight = val;
+    setX(Math.random()); //updates state of page
+  }
+
   useEffect(() => {
 
     checkExistingBuild();
@@ -168,7 +170,7 @@ export default function BuildZilla(props) {
     {name: 'Market Components', component: <MarketStep data={buildObj} />},
     {name: 'Cost to Pricing', component: <CostStep data={buildObj} />},
     {name: 'Adjustable Price', component: <AdjustStep data={buildObj} />},
-    {name: 'Delivered Price', component: <DeliverStep data={buildObj} />}
+    {name: 'Delivered Price', component: <DeliverStep data={buildObj} setFreight={setFreight} />}
     ]
 
     return (

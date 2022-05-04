@@ -1,51 +1,11 @@
 import React, {forwardRef, useImperativeHandle} from 'react';
 import CurrencyInput from 'react-currency-input-field';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
-import { OverlayTrigger, Button, Tooltip, Modal } from 'react-bootstrap';
-import { object, node } from 'prop-types';
+import { object } from 'prop-types';
 
 // We need to wrap component in `forwardRef` in order to gain
 // access to the ref object that is assigned using the `ref` prop.
 // This ref is passed as the second parameter to the function component.
 const MarketStep = forwardRef((props, ref) => {
-
-  const [modalShow, setModalShow] = React.useState(false);
-
-  function WizModal(props) {
-    return (
-      <Modal
-        {...props}
-        size="md"
-        aria-labelledby="example-modal-sizes-title-md"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-md">
-            Calculate Cost Wizard
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h3>Wizard Coming Soon....</h3>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-            consectetur ac, vestibulum at eros.
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-  
-  //const [valid, setValid] = useState(true);
-  //const [uiError, setUiError] = useState(false);
-  
-  /*const toggleValidState = () => {
-    setUiError(false);
-    setValid(!valid);
-  }*/
 
   function setStateData(v, n) {
     props.data.current[n] = parseFloat(v);
@@ -77,21 +37,6 @@ const MarketStep = forwardRef((props, ref) => {
 
             <div className="input-group mb-3 mt-5">
               <span className="input-group-text" id="basic-addon1">Cost of Component Acquisition</span>
-              <>
-              {['top'].map((placement) => (
-                <OverlayTrigger
-                  key={placement}
-                  placement={placement}
-                  overlay={
-                    <Tooltip id={`tooltip-compacq`}>
-                      Use Wizard to Calculate
-                    </Tooltip>
-                  }
-                >
-                  <Button variant="info" onClick={() => setModalShow(true)}><FontAwesomeIcon icon={faWandMagicSparkles} /></Button>
-                </OverlayTrigger>
-              ))}
-            </>
             <CurrencyInput id="compacquisition" name="compacquisition" className="form-control" prefix="$" defaultValue={props.data.current.compacquisition} onValueChange={(value, name) => setStateData(value, name)} />
             </div>
             <div className="form-text">
@@ -115,11 +60,6 @@ const MarketStep = forwardRef((props, ref) => {
               <p className="text-start">Sourcing Advantage: The difference in price between what your competitors would pay for the component and what you are able to pay. Margin Advantage: Differentiated value of a unique component as expressed in formulation.</p>
             </div>
 
-            <WizModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-
           </div>
           
         </div>
@@ -127,8 +67,7 @@ const MarketStep = forwardRef((props, ref) => {
 });
 
 MarketStep.propTypes = {
-  data: object,
-  onHide: node,
+  data: object
 }
 
 MarketStep.displayName = 'MarketStep';
