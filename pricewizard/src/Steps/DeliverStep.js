@@ -101,11 +101,13 @@ function calcFreight(miles) {
   }
 
   function setMaSuggest(suggest) {
-    setMA(suggest.label);
+    if (suggest !== undefined)
+      setMA(suggest.label);
   }
 
   function setCdaSuggest(suggest) {
-    setCDA(suggest.label);
+    if (suggest !== undefined)
+      setCDA(suggest.label);
   }
 
   // The component instance will be extended
