@@ -13,6 +13,7 @@ import { createPriceBuild as createPriceBuildMutation } from '../graphql/mutatio
 import { updatePriceBuild as updatePriceBuildMutation } from '../graphql/mutations';
 import { string } from 'prop-types';
 import { listPriceBuilds } from '../graphql/queries';
+import { useNavigate } from "react-router-dom";
 
 BuildZilla.propTypes = {
     selCategory: string
@@ -20,7 +21,7 @@ BuildZilla.propTypes = {
 
 export default function BuildZilla(props) {
 
-  
+  const navigate = useNavigate();
   const [showToast, setShowToast] = useState(false);
   const [confirmmessage, setConfirmMsg] = useState('');
   const [toaststyle, setToastStyle] = useState('success');
@@ -62,22 +63,40 @@ export default function BuildZilla(props) {
 
   function addButtons() {
     const parent = document.querySelector("div.footer-buttons");
+
+
     const d = document.createElement("div");
     d.id = "saveZilla";
     d.className = "pull-right";
     d.style = "display: inline";
 
-    parent.append(d);
-
     let donebutton = React.createElement(
       "button",
-      { className: 'btn btn-prev btn-success mb-4 ms-1',
-        onClick: () => {saveBuild()}
+      { className: 'btn btn-prev btn-info mb-4 ms-2',
+        onClick: () => {saveBuild(false)}
       },
       "Save"
     );
 
+    const f = document.createElement("div");
+    f.id = "finishZilla";
+    f.className = "pull-right";
+    f.style = "display: inline";
+
+    let finishbutton = React.createElement(
+      "button",
+      { className: 'btn btn-prev btn-success mb-4 ms-1',
+        onClick: () => {saveBuild(true)}
+      },
+      "Finish"
+    );
+
+    parent.append(f);
+    parent.append(d);
+
+    ReactDOM.render(finishbutton, document.querySelector("#finishZilla"));
     ReactDOM.render(donebutton, document.querySelector("#saveZilla"));
+    
   }
 
   async function checkExistingBuild() {
@@ -134,7 +153,7 @@ export default function BuildZilla(props) {
 
   }
 
-  async function saveBuild() {
+  async function saveBuild(finish) {
 
     var msg = "New Price Build Created Successfully!";
 
@@ -151,6 +170,9 @@ export default function BuildZilla(props) {
       msg = "Price Build Created Successfully!";
       toastConfirm("success", msg);
     }
+
+    if (finish)
+      navigate("/visualize");
 
   }
 
